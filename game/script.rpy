@@ -1,5 +1,6 @@
 ﻿init:
     $ import time
+    $ from datetime import datetime
 
 define c = Character("Carley")
 define c_unknown = Character("???")
@@ -58,6 +59,9 @@ label start:
             "What's the current time?":
                 call show_time
             
+            "Set a schedule":
+                call set_schedule
+            
             "I want to sleep...":
                 jump close_program
 
@@ -112,6 +116,26 @@ label show_time:
     c "Currently it's [current_time]"
 
     return
+
+label set_schedule:
+    show carley neutral at headcenter, halfsize
+
+    c "Okay, let's set up a schedule"
+
+    $ date = renpy.input ("Date (1-31)", length=2)
+    $ month = renpy.input ("Month (1-12)", length=2)
+    $ start_time = renpy.input ("Start time (hh:mm)", length=5)
+    $ end_time = renpy.input ("End time (hh:mm)", length=5)
+    $ sched_st = datetime.strptime("{date} {month} 2022 {start_time}".format(date=date, month=month, start_time=start_time), '%d %m %Y %H:%M')
+    $ sched_ed = datetime.strptime("{date} {month} 2022 {end_time}".format(date=date, month=month, end_time=end_time), '%d %m %Y %H:%M')
+    $ note = renpy.input ("Note", length=20)
+
+    show carley happy at center, halfsize
+
+    c "So you want to make a schedule from [sched_st] till [sched_ed] with the following notes: [note]"
+
+    return
+
 
 label close_program:
     show carley sad at headcenter, halfsize

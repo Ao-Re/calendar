@@ -7,7 +7,7 @@ An utility calendar program/app built using Ren'Py
 ## Feature Status
 - [x] Save username
 - [x] Tell the current time
-- [ ] Store and schedule
+- [ ] Store and show schedule
 - [ ] Schedule reminder
 - [ ] More TBA
 
